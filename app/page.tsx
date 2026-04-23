@@ -46,6 +46,15 @@ const solutions = [
     { title: 'Long-Term Support', description: "Regular check-ins and progress tracking for sustained health.", icon: <FaHeartbeat /> },
 ];
 
+// NEW: Images for the hero slider
+const heroImages = [
+  'https://media.gettyimages.com/id/512968603/photo/man-receives-back-massage-in-spa.jpg?s=612x612&w=0&k=20&c=pZBAD8IMUbudMZ9H07qI7bF4rXMmzYlnjejelvTzcMY=',
+  'https://images.unsplash.com/photo-1552196563-55cd4e45efb3?q=80&w=1926&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=2070&auto=format&fit=crop',
+  'https://media.gettyimages.com/id/1379765959/photo/faceless-african-american-patient-complaining-about-back-ache-and-rheumatism-to-orthopedist.jpg?s=612x612&w=0&k=20&c=SOZQ9P9NbOBY4Zgumk2m0gdLP9oXLQC0UFnjU47U80w='
+];
+
+
 // Main Page Component
 export default function Home() {
   const [preselectedIllness, setPreselectedIllness] = useState('');
@@ -58,6 +67,17 @@ export default function Home() {
 
   return (
     <>
+      {/* NEW: Style block for the sliding animation */}
+      <style jsx global>{`
+        @keyframes slide-continuous {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
+        }
+        .animate-slide-continuous {
+          animation: slide-continuous 60s linear infinite;
+        }
+      `}</style>
+
       <Header />
       <main>
 
@@ -98,8 +118,24 @@ export default function Home() {
 
     </div>
     
-    <div className="lg:w-1/2 mt-16 lg:mt-0 flex justify-center animate-fadeInUp" style={{ animationDelay: '300ms', animationFillMode: 'backwards' }}>
-        <img src="https://i.imgur.com/3qFfG7o.jpg" alt="Problems and Solutions Path for Physiotherapy" className="w-full h-auto z-10 rounded-2xl shadow-2xl" />
+    {/* UPDATED: Replaced static image with a sliding image gallery */}
+    <div className="lg:w-1/2 mt-16 lg:mt-0 animate-fadeInUp" style={{ animationDelay: '300ms', animationFillMode: 'backwards' }}>
+        <div className="w-full h-[300px] sm:h-[400px] lg:h-[500px] rounded-2xl shadow-2xl overflow-hidden">
+            <div className="flex h-full w-[200%] animate-slide-continuous">
+              {/* Original Images */}
+              {heroImages.map((src, index) => (
+                <div key={`orig-${index}`} className="h-full flex-shrink-0 px-2 box-border" style={{ width: `calc(100% / ${heroImages.length})` }}>
+                  <img src={src} alt={`Physiotherapy scene ${index + 1}`} className="w-full h-full object-cover rounded-xl" />
+                </div>
+              ))}
+              {/* Duplicated Images for seamless loop */}
+              {heroImages.map((src, index) => (
+                <div key={`dup-${index}`} className="h-full flex-shrink-0 px-2 box-border" style={{ width: `calc(100% / ${heroImages.length})` }}>
+                  <img src={src} alt={`Physiotherapy scene ${index + 1}`} className="w-full h-full object-cover rounded-xl" />
+                </div>
+              ))}
+            </div>
+        </div>
     </div>
   </div>
 
