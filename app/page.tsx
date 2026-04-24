@@ -9,6 +9,7 @@ import Header from './components/Header';
 import HeroSection from './components/HeroSection';
 import ProblemsSection from './components/ProblemsSection';
 import ProcessSection from './components/ProcessSection';
+import PricingSection from './components/PricingSection';
 import SolutionsSection from './components/SolutionsSection';
 import BookingForm from './components/BookingForm';
 import Footer from './components/Footer';
@@ -58,6 +59,7 @@ export default function Home() {
         />
         
         <ProcessSection />
+        <PricingSection />
         
         <SolutionsSection />
 
